@@ -6,8 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Math Help</title>
-  <script type="module" crossorigin src="./assets/index-B04T2TBu.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-CExRK5Ku.css">
+  <script type="module" crossorigin src="./assets/index-Eedu__f_.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-D54RthvA.css">
 </head>
 
 <body x-data="app">
@@ -17,7 +17,7 @@
   <div id="middle">
     <nav>
       <label for="search">search:</label>
-      <input type="search" id='search' x-model.debounce="search"></input>
+      <input type="search" id='search' x-model.debounce="search" x-bind:maxlength="maxLength"></input>
       <template x-for="cat in categories">
         <details open x-show="categoryWithSearch(cat, search)">
           <summary x-text="cat"></summary>
@@ -44,7 +44,7 @@
       </template>
     </main>
   </div>
-  <footer x-text="'help for v'+version+' of mathjs'"></footer>
+  <footer x-text="`help for mathjs v${version}`"></footer>
 </body>
 
 </html>

@@ -1,1 +1,0 @@
-html,body{margin:0;padding:0;height:100vh}body{display:flex;flex-direction:column;overflow-y:hidden}#middle{flex:1;display:flex;overflow:hidden}#middle>nav{flex:.5;overflow-y:auto}#middle>main{flex:1;overflow-y:auto;overflow-x:hidden}blockquote{word-wrap:break-word}
