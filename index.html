@@ -6,38 +6,44 @@
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Math Help</title>
-  <script type="module" crossorigin src="./assets/index-BoXyB_Kn.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-DVxu4pMd.css">
+  <script type="module" crossorigin src="./assets/index-BGOuw59v.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-CExRK5Ku.css">
 </head>
 
 <body x-data="app">
   <header>
     <h1>Mathjs help explorer</h1>
   </header>
-  <main>
-    
-  </main>
-    <label for="search">search:</label>
-    <input type="search" id='search' x-model="search" x-on:input.debounce = "docFromSearch=true; if(exactMatch){doc = search}"></input>
-    <div id="results" x-show="true">
-      <strong x-text="search == '' ? 'random functions: ' :'search result functions:'"></strong>
-      <template x-for="func in foundFunctions">
-        <button type="butotn" x-text="func" x-bind:title="descriptions[func]" x-on:click="doc=func; docFromSearch=false"></button>
+  <div id="middle">
+    <nav>
+      <label for="search">search:</label>
+      <input type="search" id='search' x-model.debounce="search"></input>
+      <template x-for="cat in categories">
+        <details open x-show="categoryWithSearch(cat, search)">
+          <summary x-text="cat"></summary>
+          <ul>
+            <template x-for="func in categoryFunctions[cat]">
+              <li class="function_link" x-show="functionWithSearch(func, search)">
+                <a x-text="func" x-bind:href="'#'+func" x-bind:title="descriptions[func]"></a>
+                <span x-text="': '+descriptions[func].slice(0,42)+'...'"></span>
+              </li>
+            </template>
+          </ul>
+        </details>
       </template>
-    </div>
-  <nav>
-    <template x-for="cat in categories">
-      <details>
-        <summary x-text="cat"></summary>
-        <template x-for="func in categoryFunctions[cat]">
-          <button type="button" x-text="func" x-bind:title="descriptions[func]" x-on:click="doc=func; docFromSearch=false"></button>
-        </template>
-      </details>
-    </template>
-  </nav>
-  <article class="markdown-body">
-    <pre x-html="findHelp(doc)"></pre>
-  </article>
+    </nav>
+    <main>
+      <template x-for="category in categories">
+        <section>
+          <h1 x-text="category"></h1>
+          <template x-for="doc in categoryFunctions[category]">
+            <article x-html="findHelp(doc)">
+            </article>
+          </template>
+        </section>
+      </template>
+    </main>
+  </div>
   <footer x-text="'help for v'+version+' of mathjs'"></footer>
 </body>
 
