@@ -29,14 +29,11 @@ const functionsWithHelp = Object
 window.Alpine = Alpine
 Alpine.data('app', () => ({
   search: "",
-  doc: "sum",
   descriptions,
   version: math.version,
   categories: Object.keys(categoryFunctions).sort(),
   categoryFunctions,
-  docFromSearch: false,
-  get foundOne() { return this.foundFunctions.length == 1 },
-  get exactMatch() { return this.foundFunctions.includes(this.search) },
+  get maxLength() { return Math.max(...this.findFunctions(this.search).map(x => x.length)) },
   findHelp,
   findFunctions,
   doMath,
@@ -49,11 +46,13 @@ Alpine.data('calc', () => ({
 }))
 Alpine.start()
 
-function functionWithSearch(func, search){
+
+
+function functionWithSearch(func, search) {
   return func.toLowerCase().includes(search.toLowerCase())
 }
 
-function categoryWithSearch(category, search){
+function categoryWithSearch(category, search) {
   return categoryFunctions[category].some(func => functionWithSearch(func, search))
 }
 
@@ -73,7 +72,7 @@ function findHelp(x) {
 
 function formatDoc(x, func) {
   let html = ""
-  if(x) {html += `<h2 id="${func}">${func}</h2>`}
+  if (x) { html += `<h2 id="${func}">${func}</h2>` }
   if (x.name) { html += `<p><strong>Name:</strong> ${x.name}</p>` }
   if (x.category) { html += `<p><strong>Category:</strong> ${x.category}</p>` }
   if (x.description) { html += `<p><strong>Description:</strong> <blockquote>${x.description}</blockquote></p>` }
@@ -108,12 +107,12 @@ function doMath(x) {
   }
 }
 
-function caseLessSort(a, b){
+function caseLessSort(a, b) {
   {
-    if(a.toLowerCase() < b.toLowerCase()){
-      return-1
+    if (a.toLowerCase() < b.toLowerCase()) {
+      return -1
     }
-    if(a.toLowerCase() > b.toLowerCase()){
+    if (a.toLowerCase() > b.toLowerCase()) {
       return 1
     }
     return 0;

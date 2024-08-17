@@ -1,11 +1,10 @@
 # todo
 
-- [ ] Limit the length of the search element, to the longest function to be found.
-- [ ] Style
+- [ ] Swith logic to create html to alpine
 - [ ] Nav bar
   - [ ] Put footer in nav bar
   - [ ] Allways show search and footer
-- [ ] Swith logic to create html to alpine
+- [ ] Style
 - [ ] Examples as <pre> instead of textarea
   - [ ] If clicked convert to <textarea> that generates a result
   - [ ] If clicked away convert back to pre
@@ -18,6 +17,7 @@
   
 # done
 
+- [x] Limit the length of the search element, to the longest function to be found.
 - [x] Search depending upper and lower case
 - [x] Return the title to links
 - [x] Add titles to sections

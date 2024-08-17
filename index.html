@@ -15,7 +15,7 @@
   <div id="middle">
     <nav>
       <label for="search">search:</label>
-      <input type="search" id='search' x-model.debounce="search"></input>
+      <input type="search" id='search' x-model.debounce="search" x-bind:maxlength="maxLength"></input>
       <template x-for="cat in categories">
         <details open x-show="categoryWithSearch(cat, search)">
           <summary x-text="cat"></summary>
@@ -42,7 +42,7 @@
       </template>
     </main>
   </div>
-  <footer x-text="'help for v'+version+' of mathjs'"></footer>
+  <footer x-text="`help for mathjs v${version}`"></footer>
   <script type="module" src="/main.js"></script>
 </body>
 
