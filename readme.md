@@ -2,7 +2,7 @@ This is an explorer for mathjs functions.
 
 Includes instant search, navigation bar, examples and playground.
 
-Found in [site]
+[Site](https://dvd101x.github.io/mathHelp/)
 
 # Instructions
 

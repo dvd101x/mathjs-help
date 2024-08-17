@@ -1,5 +1,4 @@
 import './style.css'
-import 'github-markdown-css/github-markdown-light.css'
 
 import Alpine from 'alpinejs'
 import { create, all } from 'mathjs'
@@ -9,19 +8,19 @@ const parser = math.parser()
 
 const initialConfig = math.clone(math.config())
 
-const functionByCategory = {}
+const categoryFunctions = {}
 const descriptions = {}
 const functionsWithHelp = Object
-  .keys(math.expression.mathWithTransform)
+  .keys(math.expression.mathWithTransform).sort(caseLessSort)
   .filter(funcName => {
     try {
       const help = math.evaluate(`help(${funcName})`)
-      const category = help.doc.category || "null"
+      const category = help.doc.category || "no category"
       descriptions[funcName] = help.doc.description || "No description available for function " + funcName
-      if (functionByCategory[category]) {
-        functionByCategory[category].push(funcName)
+      if (categoryFunctions[category]) {
+        categoryFunctions[category].push(funcName)
       } else {
-        functionByCategory[category] = [funcName]
+        categoryFunctions[category] = [funcName]
       }
       return true
     } catch (e) { return false }
@@ -29,19 +28,20 @@ const functionsWithHelp = Object
 
 window.Alpine = Alpine
 Alpine.data('app', () => ({
-  search: "sum",
+  search: "",
   doc: "sum",
   descriptions,
   version: math.version,
-  categories: Object.keys(functionByCategory).sort(),
-  categoryFunctions: functionByCategory,
+  categories: Object.keys(categoryFunctions).sort(),
+  categoryFunctions,
   docFromSearch: false,
-  get foundFunctions() { return findFunctions(this.search) },
   get foundOne() { return this.foundFunctions.length == 1 },
   get exactMatch() { return this.foundFunctions.includes(this.search) },
   findHelp,
   findFunctions,
-  doMath
+  doMath,
+  functionWithSearch,
+  categoryWithSearch
 }))
 Alpine.data('calc', () => ({
   output: "...",
@@ -49,9 +49,15 @@ Alpine.data('calc', () => ({
 }))
 Alpine.start()
 
+function functionWithSearch(func, search){
+  return func.includes(search)
+}
+
+function categoryWithSearch(category, search){
+  return categoryFunctions[category].some(func => functionWithSearch(func, search))
+}
 
 function findFunctions(string) {
-  if (string.trim() === "") { return math.pickRandom(functionsWithHelp, 10) }
   return functionsWithHelp.filter(func => func.toLowerCase().includes(string.toLowerCase()))
 }
 function findHelp(x) {
@@ -67,18 +73,19 @@ function findHelp(x) {
 
 function formatDoc(x, func) {
   let html = ""
-  if(x) {html += `<h2>${func}</h2>`}
+  if(x) {html += `<h2 id="${func}">${func}</h2>`}
   if (x.name) { html += `<p><strong>Name:</strong> ${x.name}</p>` }
   if (x.category) { html += `<p><strong>Category:</strong> ${x.category}</p>` }
   if (x.description) { html += `<p><strong>Description:</strong> <blockquote>${x.description}</blockquote></p>` }
   if (x.syntax) { html += `<p><strong>Syntax:</strong><pre>${x.syntax.join("\n")}</pre></p>` }
   if (x.examples) { html += `<p><strong>Examples:<br></strong>${exampleEval(x.examples.join('\n'))}</p>` }
-  if (x.seealso) { html += `<p><strong>See also:</strong><br>${x.seealso.map(seeAlsoButton).join("")}</p>` }
+  if (x.seealso) { html += `<p><strong>See also:</strong><br>${x.seealso.map(seeAlsoLink).join(", ")}</p>` }
   return html
 
-  function seeAlsoButton(func) {
-    return `<button type="butotn" x-on:click="doc='${func}'" x-bind:title="descriptions['${func}']">${func}</button>`
+  function seeAlsoLink(func) {
+    return `<a href='#${func}' x-bind:title="descriptions['${func}']">${func}</a>`
   }
+
   function exampleEval(example) {
     return `<div x-data="calc" class="calc">
     <textarea rows='6' spellcheck='false' @input.debounce="output = doMath($el.value)">${example}</textarea>
@@ -98,5 +105,17 @@ function doMath(x) {
     return result
   } catch (error) {
     return error.toString()
+  }
+}
+
+function caseLessSort(a, b){
+  {
+    if(a.toLowerCase() < b.toLowerCase()){
+      return-1
+    }
+    if(a.toLowerCase() > b.toLowerCase()){
+      return 1
+    }
+    return 0;
   }
 }
