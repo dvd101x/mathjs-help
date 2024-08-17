@@ -2,18 +2,23 @@
 
 - [ ] Limit the length of the search element, to the longest function to be found.
 - [ ] Style
+- [ ] Nav bar
+  - [ ] Put footer in nav bar
+  - [ ] Allways show search and footer
 - [ ] Swith logic to create html to alpine
-- [ ] Examples as <pre>
+- [ ] Examples as <pre> instead of textarea
   - [ ] If clicked convert to <textarea> that generates a result
   - [ ] If clicked away convert back to pre
 
 # maybe
+- [ ] If the search is found on a category open the category.
 - [ ] Make a playground
 - [ ] Add button for random functions instead of empty search
   - [ ] Empty search shows empty results
   
 # done
 
+- [x] Search depending upper and lower case
 - [x] Return the title to links
 - [x] Add titles to sections
 - [x] Change buttons to links and some titles to plain text without link

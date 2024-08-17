@@ -50,7 +50,7 @@ Alpine.data('calc', () => ({
 Alpine.start()
 
 function functionWithSearch(func, search){
-  return func.includes(search)
+  return func.toLowerCase().includes(search.toLowerCase())
 }
 
 function categoryWithSearch(category, search){
