@@ -10,29 +10,34 @@
 
 <body x-data="app">
   <header>
+    <h1>Mathjs help explorer</h1>
+  </header>
+  <main>
+    
+  </main>
     <label for="search">search:</label>
-    <input type="search" id='search' x-model="search"></input>
-    <div id="results" x-show="!foundOne">
+    <input type="search" id='search' x-model="search" x-on:input.debounce = "docFromSearch=true; if(exactMatch){doc = search}"></input>
+    <div id="results" x-show="true">
+      <strong x-text="search == '' ? 'random functions: ' :'search result functions:'"></strong>
       <template x-for="func in foundFunctions">
-        <button type="butotn" x-text="func" x-bind:title="descriptions[func]" x-on:click="search=func"></button>
+        <button type="butotn" x-text="func" x-bind:title="descriptions[func]" x-on:click="doc=func; docFromSearch=false"></button>
       </template>
     </div>
-  </header>
   <nav>
     <template x-for="cat in categories">
       <details>
         <summary x-text="cat"></summary>
         <template x-for="func in categoryFunctions[cat]">
-          <button type="button" x-text="func" x-bind:title="descriptions[func]" x-on:click="search=func"></button>
+          <button type="button" x-text="func" x-bind:title="descriptions[func]" x-on:click="doc=func; docFromSearch=false"></button>
         </template>
       </details>
     </template>
   </nav>
-  <article x-show="foundOne" class="markdown-body">
-    <pre x-html="findHelp(foundOne ? foundFunctions[0] : search)"></pre>
+  <article class="markdown-body">
+    <pre x-html="findHelp(doc)"></pre>
   </article>
-  <div x-html="test"></div>
   <footer x-text="'help for v'+version+' of mathjs'"></footer>
   <script type="module" src="/main.js"></script>
 </body>
+
 </html>
