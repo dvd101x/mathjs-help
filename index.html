@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Math Help</title>
+  <script type="module" crossorigin src="/assets/index-Cu3KDTl4.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DVxu4pMd.css">
+</head>
+
+<body x-data="app">
+  <header>
+    <label for="search">search:</label>
+    <input type="search" id='search' x-model="search"></input>
+    <div id="results" x-show="!foundOne">
+      <template x-for="func in foundFunctions">
+        <button type="butotn" x-text="func" x-bind:title="descriptions[func]" x-on:click="search=func"></button>
+      </template>
+    </div>
+  </header>
+  <nav>
+    <template x-for="cat in categories">
+      <details>
+        <summary x-text="cat"></summary>
+        <template x-for="func in categoryFunctions[cat]">
+          <button type="button" x-text="func" x-bind:title="descriptions[func]" x-on:click="search=func"></button>
+        </template>
+      </details>
+    </template>
+  </nav>
+  <article x-show="foundOne" class="markdown-body">
+    <pre x-html="findHelp(foundOne ? foundFunctions[0] : search)"></pre>
+  </article>
+  <div x-html="test"></div>
+  <footer x-text="'help for v'+version+' of mathjs'"></footer>
+</body>
+</html>
