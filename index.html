@@ -6,8 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Math Help</title>
-  <script type="module" crossorigin src="./assets/index-Cjx-Fzh4.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-Dua-R6Kn.css">
+  <script type="module" crossorigin src="./assets/index-DJpr8jeC.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-M6H3vyby.css">
 </head>
 
 <body>
@@ -67,7 +67,7 @@
                 <h4>Examples</h4>
                 <pre class='examples' x-show="!editing" x-text="example" @click="editing = true; input=example"></pre>
                 <div x-show='editing' class="editor" @click.outside="editing = false">
-                  <textarea rows='6' spellcheck='false' x-model.debounce="input"></textarea>
+                  <textarea :rows="example.split('\n').length" spellcheck='false' x-model.debounce="input"></textarea>
                   <pre x-text='doMath(input)'></pre>
                 </div>
               </div>
