@@ -61,35 +61,12 @@ function findFunctions(string) {
 }
 function findHelp(x) {
   if (x.trim() == "") {
-    return "Nothing here"
+    return { name: x, description: "Nothing here" }
   }
   try {
-    return formatDoc(math.evaluate(`help(${x})`).doc, x)
+    return math.evaluate(`help(${x})`).doc
   } catch (error) {
-    return 'no documentation found on: ' + x
-  }
-}
-
-function formatDoc(x, func) {
-  let html = ""
-  if (x) { html += `<h2 id="${func}">${func}</h2>` }
-  if (x.name) { html += `<p><strong>Name:</strong> ${x.name}</p>` }
-  if (x.category) { html += `<p><strong>Category:</strong> ${x.category}</p>` }
-  if (x.description) { html += `<p><strong>Description:</strong> <blockquote>${x.description}</blockquote></p>` }
-  if (x.syntax) { html += `<p><strong>Syntax:</strong><pre>${x.syntax.join("\n")}</pre></p>` }
-  if (x.examples) { html += `<p><strong>Examples:<br></strong>${exampleEval(x.examples.join('\n'))}</p>` }
-  if (x.seealso) { html += `<p><strong>See also:</strong><br>${x.seealso.map(seeAlsoLink).join(", ")}</p>` }
-  return html
-
-  function seeAlsoLink(func) {
-    return `<a href='#${func}' x-bind:title="descriptions['${func}']">${func}</a>`
-  }
-
-  function exampleEval(example) {
-    return `<div x-data="calc" class="calc">
-    <textarea rows='6' spellcheck='false' @input.debounce="output = doMath($el.value)">${example}</textarea>
-    <pre x-html='output'></pre>
-    </div>`
+    return { name: x, description: 'No documentation found on: '+x }
   }
 }
 

@@ -1,22 +1,28 @@
 # todo
 
-- [ ] Swith logic to create html to alpine
-- [ ] Nav bar
-  - [ ] Put footer in nav bar
-  - [ ] Allways show search and footer
-- [ ] Style
-- [ ] Examples as <pre> instead of textarea
-  - [ ] If clicked convert to <textarea> that generates a result
-  - [ ] If clicked away convert back to pre
+- [ ] Syntax highlighting with highlightjs
+- [ ] Simplify
 
 # maybe
 - [ ] If the search is found on a category open the category.
-- [ ] Make a playground
 - [ ] Add button for random functions instead of empty search
   - [ ] Empty search shows empty results
+- [ ] Make a constant playground
+- [ ] Reactive
   
 # done
 
+- [x] Style
+  - [x] Accents
+  - [x] Fonts
+- [x] Nav bar
+  - [x] Put footer in nav bar
+  - [x] Allways show search and footer
+- [x] Swith logic to create html to alpine
+- [x] Examples as <pre> instead of textarea
+  - [x] If clicked convert to <textarea> that generates a result
+  - [x] If clicked away convert back to pre
+  - [x] Add link to the current function in it's header
 - [x] Limit the length of the search element, to the longest function to be found.
 - [x] Search depending upper and lower case
 - [x] Return the title to links

@@ -8,41 +8,79 @@
   <title>Math Help</title>
 </head>
 
-<body x-data="app">
+<body>
   <header>
     <h1>Mathjs help explorer</h1>
   </header>
-  <div id="middle">
+  <div id="middle" x-data="app">
     <nav>
-      <label for="search">search:</label>
-      <input type="search" id='search' x-model.debounce="search" x-bind:maxlength="maxLength"></input>
-      <template x-for="cat in categories">
-        <details open x-show="categoryWithSearch(cat, search)">
-          <summary x-text="cat"></summary>
-          <ul>
-            <template x-for="func in categoryFunctions[cat]">
-              <li class="function_link" x-show="functionWithSearch(func, search)">
-                <a x-text="func" x-bind:href="'#'+func" x-bind:title="descriptions[func]"></a>
-                <span x-text="': '+descriptions[func].slice(0,42)+'...'"></span>
-              </li>
-            </template>
-          </ul>
-        </details>
-      </template>
+      <div id="searchSection">
+        <label for="search">search:</label>
+        <input type="search" id="search" x-model.debounce="search" x-bind:maxlength="maxLength"></input>
+      </div>
+      <div id="searchResults">
+        <template x-for="cat in categories">
+          <details open x-show="categoryWithSearch(cat, search)">
+            <summary x-text="cat"></summary>
+            <ul>
+              <template x-for="func in categoryFunctions[cat]">
+                <li class="function_link" x-show="functionWithSearch(func, search)">
+                  <a x-text="func" x-bind:href="'#'+func" x-bind:title="descriptions[func]"></a>
+                  <span x-text="': '+descriptions[func].slice(0,42)+'...'"></span>
+                </li>
+              </template>
+            </ul>
+          </details>
+        </template>
+      </div>
+      <footer x-text="`help for mathjs v${version}`"></footer>
     </nav>
     <main>
       <template x-for="category in categories">
         <section>
-          <h1 x-text="category"></h1>
-          <template x-for="doc in categoryFunctions[category]">
-            <article x-html="findHelp(doc)">
+          <h2 x-text="category"></h2>
+          <template x-for="func in categoryFunctions[category]">
+            <article x-data="{doc:findHelp(func)}">
+              <h3>
+                <a :href="'#'+func">#</a>
+                <span :id="func" x-text="func"></span>
+              </h3>
+              <div x-show="false">
+                <h4>Name</h4>
+                <p x-text="doc.name"></p>
+              </div>
+              <div x-show="false">
+                <h4>Category</h4>
+                <p x-text="doc.category"></p>
+              </div>
+              <div x-show="doc.description">
+                <h4>Description</h4>
+                <p x-text="doc.description"></p>
+              </div>
+              <div x-show='doc.syntax'>
+                <h4>Syntax</h4>
+                <pre x-text="doc.syntax.join('\n')"></pre>
+              </div>
+              <div x-show="doc.examples" x-data="{editing:false, example:doc.examples.join('\n'), input:''}">
+                <h4>Examples</h4>
+                <pre class='examples' x-show="!editing" x-text="example" @click="editing = true; input=example"></pre>
+                <div x-show='editing' class="editor" @click.outside="editing = false">
+                  <textarea rows='6' spellcheck='false' x-model.debounce="input"></textarea>
+                  <pre x-text='doMath(input)'></pre>
+                </div>
+              </div>
+              <div x-show="doc.seealso">
+                <h4>See also</h4>
+                <template x-for="seeFunc in doc.seealso">
+                  <a class="seeAlsoLink" :href="'#'+seeFunc" x-text="seeFunc"></a>
+                </template>
+              </div>
             </article>
           </template>
         </section>
       </template>
     </main>
   </div>
-  <footer x-text="`help for mathjs v${version}`"></footer>
   <script type="module" src="/main.js"></script>
 </body>
 
