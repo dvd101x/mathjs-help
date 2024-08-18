@@ -93,13 +93,14 @@ article pre {
 
 .editor>textarea {
   padding: 1em;
-  background-color: #AFD0BF;
+  background-color: #c9dad1;
   font-family: monospace;
   font-size: 12px;
+  resize: none;
 }
 
 .editor>pre {
-  padding: 0.5em;
+  padding: 1em;
   overflow-x: scroll;
   background-color: #FF6542;
   color: white;

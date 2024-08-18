@@ -59,14 +59,15 @@
               </div>
               <div x-show='doc.syntax'>
                 <h4>Syntax</h4>
-                <pre x-text="doc.syntax.join('\n')"></pre>
+                <pre x-text="doc.syntax ? doc.syntax.join('\n') : ''"></pre>
               </div>
-              <div x-show="doc.examples" x-data="{editing:false, example:doc.examples.join('\n'), input:''}">
+              <div x-show="doc.examples"
+                x-data="{editing:false, example:doc.examples.join('\n'), input:doc.examples.join('\n')}">
                 <h4>Examples</h4>
-                <pre class='examples' x-show="!editing" x-text="example" @click="editing = true; input=example"></pre>
-                <div x-show='editing' class="editor" @click.outside="editing = false">
-                  <textarea :rows="example.split('\n').length" spellcheck='false' x-model.debounce="input"></textarea>
-                  <pre x-text='doMath(input)'></pre>
+                <div class="editor" @click.outside="editing = false" @click="editing = true; input=example">
+                  <textarea ahtocomplete='off' :rows="input.split('\n').length" spellcheck='false'
+                    x-model.debounce="input"></textarea>
+                  <pre x-text='doMath(input)' x-show="editing"></pre>
                 </div>
               </div>
               <div x-show="doc.seealso">
