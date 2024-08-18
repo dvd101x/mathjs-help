@@ -6,17 +6,17 @@ Includes instant search, navigation bar, examples and a playground for each func
 
 # Instructions
 
-Start by running
+Install dependancies
 ```
 npm run install
 ```
-Launch the dev server with
+Launch the dev server
 ```
 npm run dev
 ````
-And build the final site with
+Build the final site
 ```
 npm run build
 ```
 
-Currently it uses vite, if I cann keep it simple y will migrate to no build process.
+Currently it uses vite, if I can keep it simple enough I will migrate to plain files with no build.
