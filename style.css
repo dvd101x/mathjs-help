@@ -87,11 +87,11 @@ article pre {
 
 .editor {
   display: flex;
+  flex-direction: column;
   background-color: #AFD0BF;
 }
 
 .editor>textarea {
-  flex: 1;
   padding: 1em;
   background-color: #AFD0BF;
   font-family: monospace;
@@ -99,12 +99,12 @@ article pre {
 }
 
 .editor>pre {
-  flex: 1;
   padding: 0.5em;
   overflow-x: scroll;
   background-color: #FF6542;
   color: white;
-  margin: 0px
+  margin: 0px;
+  font-weight: bold;
 }
 
 .examples {

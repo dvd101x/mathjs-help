@@ -65,7 +65,7 @@
                 <h4>Examples</h4>
                 <pre class='examples' x-show="!editing" x-text="example" @click="editing = true; input=example"></pre>
                 <div x-show='editing' class="editor" @click.outside="editing = false">
-                  <textarea rows='6' spellcheck='false' x-model.debounce="input"></textarea>
+                  <textarea :rows="example.split('\n').length" spellcheck='false' x-model.debounce="input"></textarea>
                   <pre x-text='doMath(input)'></pre>
                 </div>
               </div>
