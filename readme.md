@@ -8,7 +8,7 @@ Includes instant search, navigation bar, examples and a playground for each func
 
 Install dependancies
 ```
-npm run install
+npm install
 ```
 Launch the dev server
 ```
