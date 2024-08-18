@@ -1,6 +1,6 @@
-This is an explorer for mathjs functions.
+This is an explorer for mathjs embedded documents in functions.
 
-Includes instant search, navigation bar, examples and playground.
+Includes instant search, navigation bar, examples and a playground for each function.
 
 [Site](https://dvd101x.github.io/mathHelp/)
 
