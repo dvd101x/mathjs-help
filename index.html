@@ -65,7 +65,7 @@
                 x-data="{editing:false, example:doc.examples.join('\n'), input:doc.examples.join('\n')}">
                 <h4>Examples</h4>
                 <div class="editor" @click.outside="editing = false" @click="editing = true; input=example">
-                  <textarea ahtocomplete='off' :rows="input.split('\n').length" spellcheck='false'
+                  <textarea :readonly="!editing" autocomplete='off' :rows="input.split('\n').length" spellcheck='false'
                     x-model.debounce="input"></textarea>
                   <pre x-text='doMath(input)' x-show="editing"></pre>
                 </div>
