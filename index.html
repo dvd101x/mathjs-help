@@ -6,8 +6,8 @@
   <link rel="icon" type="image/svg+xml" href="./vite.svg" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Math Help</title>
-  <script type="module" crossorigin src="./assets/index-BoBYvLOm.js"></script>
-  <link rel="stylesheet" crossorigin href="./assets/index-B45_tG25.css">
+  <script type="module" crossorigin src="./assets/index-DNDAScfP.js"></script>
+  <link rel="stylesheet" crossorigin href="./assets/index-B1iqdDhD.css">
 </head>
 
 <body>
@@ -28,7 +28,7 @@
               <template x-for="func in categoryFunctions[cat]">
                 <li class="function_link" x-show="functionWithSearch(func, search)">
                   <a x-text="func" x-bind:href="'#'+func" x-bind:title="descriptions[func]"></a>
-                  <span x-text="': '+descriptions[func].slice(0,42)+'...'"></span>
+                  <div x-text="descriptions[func]"></div>
                 </li>
               </template>
             </ul>
@@ -76,7 +76,7 @@
               <div x-show="doc.seealso">
                 <h4>See also</h4>
                 <template x-for="seeFunc in doc.seealso">
-                  <a class="seeAlsoLink" :href="'#'+seeFunc" x-text="seeFunc"></a>
+                  <a class="seeAlsoLink" :href="'#'+seeFunc" x-text="seeFunc" x-bind:title="descriptions[seeFunc]"></a>
                 </template>
               </div>
             </article>
