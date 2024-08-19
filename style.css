@@ -5,6 +5,19 @@ body {
   height: 100vh;
 }
 
+a {
+  color: #363020;
+  text-decoration: none;
+}
+
+a:visited {
+  color: #363020
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
 body {
   display: flex;
   flex-direction: column;
@@ -58,6 +71,15 @@ header>h1 {
   flex: 1;
   overflow-y: auto;
   font-family: Arial, Helvetica, sans-serif;
+  background-color: #E2EFDE;
+}
+
+#searchResults li a {
+  font-weight: bolder;
+}
+
+#searchResults li {
+  color: #064789
 }
 
 #searchResults ul {
@@ -70,7 +92,6 @@ header>h1 {
   overflow-y: auto;
   overflow-x: hidden;
   padding: 2em;
-  background-color: #E2EFDE;
 }
 
 blockquote {
