@@ -83,6 +83,9 @@ blockquote {
 
 article pre {
   overflow-x: scroll;
+  background-color: #c9dad1;
+  padding: 1em;
+  font-size: 12px;
 }
 
 .editor {
