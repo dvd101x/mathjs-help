@@ -2,13 +2,14 @@
 
 - [ ] Syntax highlighting with highlightjs
 - [ ] Simplify
+- [ ] If examples are empty return hide.
 
 # maybe
+
 - [ ] If the search is found on a category open the category.
-- [ ] Add button for random functions instead of empty search
-  - [ ] Empty search shows empty results
+- [ ] Add button for random functions
 - [ ] Make a constant playground
-- [ ] Reactive
+- [ ] Remove build process
   
 # done
 

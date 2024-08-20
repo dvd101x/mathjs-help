@@ -61,7 +61,7 @@
                 <h4>Syntax</h4>
                 <pre x-text="doc.syntax ? doc.syntax.join('\n') : ''"></pre>
               </div>
-              <div x-show="doc.examples"
+              <div x-show="doc.examples && doc.examples.length > 0"
                 x-data="{editing:false, example:doc.examples.join('\n'), input:doc.examples.join('\n')}">
                 <h4>Examples</h4>
                 <pre x-show="!editing" @click="editing = true; input=example" x-text="example"></pre>
@@ -71,7 +71,7 @@
                   <pre x-text='doMath(input)' x-show="editing"></pre>
                 </div>
               </div>
-              <div x-show="doc.seealso">
+              <div x-show="doc.seealso && doc.seealso.length > 0">
                 <h4>See also</h4>
                 <template x-for="seeFunc in doc.seealso">
                   <a class="seeAlsoLink" :href="'#'+seeFunc" x-text="seeFunc" x-bind:title="descriptions[seeFunc]"></a>
