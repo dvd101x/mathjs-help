@@ -103,7 +103,7 @@ blockquote {
 }
 
 article pre {
-  overflow-x: scroll;
+  overflow-x: auto;
   background-color: #c9dad1;
   padding: 1em;
   font-size: 12px;
